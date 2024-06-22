@@ -25,7 +25,7 @@ msg['Subject'] = st.text_input("Subject:")
 contents = st.text_area("Message Content:")
 msg.set_content(contents)
 
-msg['From'] = "arjan.suri17@gmail.com"
+msg['From'] = st.secrets["email"]["user"]
 msg['Cc'] = 'pmunipallep@gmail.com, harneksab@gmail.com'
 
 st.header("Greetings and Customization")
@@ -40,7 +40,7 @@ sample = st.write(f"{chosenGreeting}, Dr. ___,\n\n{contents}\n\n {ending}, Arjan
 def send_email(email_message):
     try:
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-            smtp.login("arjan.suri17@gmail.com", "ckxn enxa aeab tnai")
+            smtp.login(st.secrets["email"]["user"], st.secrets["email"]["password"])
             smtp.send_message(email_message)
             st.success("Email sent successfully!")
     except Exception as e:
